@@ -5,7 +5,7 @@ COPY jenkins-plugin-model/src/Pi.Math/Pi.Math.csproj ./Pi.Math/
 COPY jenkins-plugin-model/src/Pi.Runtime/Pi.Runtime.csproj ./Pi.Runtime/
 COPY jenkins-plugin-model/src/Pi.Web/Pi.Web.csproj ./Pi.Web/
 
-WORKDIR /jenkins-plugin-model//src/Pi.Web
+WORKDIR /jenkins-plugin-model/src/Pi.Web
 RUN dotnet restore
 
 # app image
