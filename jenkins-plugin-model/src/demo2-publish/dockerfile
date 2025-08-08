@@ -5,6 +5,8 @@ COPY jenkins-plugin-model/src/Pi.Math/Pi.Math.csproj ./Pi.Math/
 COPY jenkins-plugin-model/src/Pi.Runtime/Pi.Runtime.csproj ./Pi.Runtime/
 COPY jenkins-plugin-model/src/Pi.Web/Pi.Web.csproj ./Pi.Web/
 
+RUN ls -la /jenkins-plugin-model/src/Pi.Web
+RUN cat /jenkins-plugin-model/src/Pi.Web/Pi.Web.csproj
 WORKDIR /jenkins-plugin-model/src/Pi.Web
 RUN dotnet restore
 
