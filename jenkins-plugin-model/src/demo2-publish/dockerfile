@@ -1,18 +1,21 @@
+# Build stage
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS builder
+WORKDIR /src
 
-WORKDIR /jenkins-plugin-model/src
-COPY jenkins-plugin-model/src/Pi.Math/Pi.Math.csproj ./Pi.Math/
-COPY jenkins-plugin-model/src/Pi.Runtime/Pi.Runtime.csproj ./Pi.Runtime/
-COPY jenkins-plugin-model/src/Pi.Web/Pi.Web.csproj ./Pi.Web/
+# Copy csproj files and restore first
+COPY jenkins-plugin-model/src/Pi.Math/Pi.Math.csproj Pi.Math/
+COPY jenkins-plugin-model/src/Pi.Runtime/Pi.Runtime.csproj Pi.Runtime/
+COPY jenkins-plugin-model/src/Pi.Web/Pi.Web.csproj Pi.Web/
+RUN dotnet restore Pi.Web/Pi.Web.csproj
 
-RUN ls -la /jenkins-plugin-model/src/Pi.Web
-RUN cat /jenkins-plugin-model/src/Pi.Web/Pi.Web.csproj
-WORKDIR /jenkins-plugin-model/src/Pi.Web
-RUN dotnet restore
+# Copy everything else and build
+COPY jenkins-plugin-model/src/ .
+RUN dotnet publish Pi.Web/Pi.Web.csproj -c Release -o /app/publish
 
-# app image
+# Runtime stage
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
+WORKDIR /app
+COPY --from=builder /app/publish .
 
 EXPOSE 80
 ENTRYPOINT ["dotnet", "Pi.Web.dll"]
-CMD ["-m", "console", "-dp", "6"]
