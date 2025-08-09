@@ -32,3 +32,37 @@ pipeline {
         }
     }
 }
+
+OR ON A JENKINS CONTAINER : 
+
+pipeline {
+    agent any
+
+    environment {
+        DOTNET_ROOT = '/var/jenkins_home/.dotnet'
+        PATH = "${env.PATH}:/var/jenkins_home/.dotnet"
+    }
+
+    stages {
+        stage('Prepare Environment') {
+            steps {
+                sh '''
+                    apt-get update
+                    apt-get install -y curl apt-transport-https ca-certificates gnupg lsb-release libicu72
+                '''
+            }
+        }
+
+        stage('Install .NET 7 SDK') {
+            steps {
+                sh '''
+                    mkdir -p /var/jenkins_home/.dotnet
+                    curl -sSL https://dot.net/v1/dotnet-install.sh > dotnet-install.sh
+                    bash dotnet-install.sh --channel 7.0 --install-dir /var/jenkins_home/.dotnet --verbose
+                    ls -l /var/jenkins_home/.dotnet
+                    /var/jenkins_home/.dotnet/dotnet --version
+                '''
+            }
+        }
+    }
+}
