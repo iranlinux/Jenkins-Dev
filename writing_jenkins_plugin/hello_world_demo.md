@@ -13,7 +13,7 @@ move to /opt -- mv apache-maven****** /opt/
 
 
 # Add the following lines to the user profile file (.profile).
-M2_HOME='/opt/apache-maven-******' /opt/apache-maven-3.9.4
+M2_HOME='/opt/apache-maven-******' /opt/apache-maven-3.9.11
 PATH="$M2_HOME/bin:$PATH"
 export PATH
 
