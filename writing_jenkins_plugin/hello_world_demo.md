@@ -11,6 +11,13 @@ Download Maven Tar from https://maven.apache.org/download.cgi
 Unzip tar - tar -xvzf <file_name>
 move to /opt -- mv apache-maven****** /opt/
 
+#Option 2 
+
+curl -s "https://get.sdkman.io" | bash
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install maven 3.9.11
+sdk use maven 3.9.11
+
 
 # Add the following lines to the user profile file (.profile).
 M2_HOME='/opt/apache-maven-******' /opt/apache-maven-3.9.11
