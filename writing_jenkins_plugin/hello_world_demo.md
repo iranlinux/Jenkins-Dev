@@ -17,6 +17,13 @@ M2_HOME='/opt/apache-maven-******' /opt/apache-maven-3.9.11
 PATH="$M2_HOME/bin:$PATH"
 export PATH
 
+WILL BE : 
+
+M2_HOME='/opt/apache-maven-3.9.11'
+PATH="$M2_HOME/bin:$PATH"
+export PATH
+
+
 Relaunch the terminal or execute source .profile to apply the changes.
 Execute mvn -version command
 
