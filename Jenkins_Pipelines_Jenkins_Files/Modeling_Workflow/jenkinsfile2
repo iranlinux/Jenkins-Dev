@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Deploy') {
             input {
-                message 'Hey Learn Files team, Do you want to Deploy?'
+                message 'Hey LearnFiles team, Do you want to Deploy?'
                 ok 'Yup,DO IT NOW!'
                 parameters {
                     string(name: 'TARGET_ENVIRONMENT', defaultValue: 'PROD', description: 'Target deployment environment')
